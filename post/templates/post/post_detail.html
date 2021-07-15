@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{object.body}}
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container-fluid">
+            <h2>{{object.author.first_name}}&nbsp;&nbsp;
+                {% if object.author.id == user.id %}
+                <span><a href="{% url 'post_delete' object.pk %}" class="btn btn-primary btn-lg active"  style="font-size: medium;">Delete</a></span> 
+                {% endif %}
+            </h2><br>
+            <pre>{{object.body}}</pre>
+            <div>
+                <h3>Comments...</h3>
+                <hr>
+                {% if not object.comments.all %}
+                    <h5>No Comments.....</h5>
+                {% else %}
+                    {% for com in object.comments.all %}
+                    <h4>{{com.author.first_name}}</h4>
+                    <br>
+                    <pre> {{com.body}} </pre>
+                    <hr>
+                    {% endfor %}
+                {% endif %}
+                <a href="{% url 'add_comment' object.pk %}" class="btn btn-primary btn-lg active" > Add Comment</a>
+            </div>
+        </div>
+    {% else %}
+        <div>
+            <h4>To go further please Login!!!</h4>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+    {% endif %}
+    
+{% endblock %}
+

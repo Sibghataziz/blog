@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Add Comment
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container-fluid">
+            <h1>Add Comment</h1>
+            <br><br>
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.as_p }}
+                    <button class="btn btn-dark" type="submit">Post</button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+    <div>
+        <h4>To go further please Login!!!</h4>
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg active" >Login</a>
+    {% endif %}
+    </div>
+    
+{% endblock %}
+

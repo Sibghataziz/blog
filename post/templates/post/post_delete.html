@@ -1,0 +1,28 @@
+
+{% extends 'base.html' %}
+{% block title %}
+    Delete Post
+{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if object.author.id == user.id %}
+        <div>
+            <form action='post_delete' method='POST'>{% csrf_token %}
+                <h1>Are you sure you want to delete the Post???</h1>
+                <p><input value='Delete' type="submit"/>  <a href='{% url "home" %}'>Cancel</a></p>
+
+            </form>
+        </div>
+    {% endif %}
+{% else %}
+    <div>
+        <h4>To go further please Login!!!</h4>
+        <a href="{% url 'login' %} " class="btn btn-primary btn-lg active" >Login</a>
+    </div>
+{% endif %}
+
+
+
+{% endblock %}
+

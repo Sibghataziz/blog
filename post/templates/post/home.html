@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container-fluid">
+            <h1>Post</h1>
+            {% for post in posts %}
+            <div>
+                <h4>{{post.author.first_name}} <span style="font-size: small;">-  {{post.post_date}} </span> </h4>
+                <p style="background-color:whitesmoke;"><a href="{% url 'detail_post' post.pk %}" style="text-decoration:solid; color: black;">{{post.body|slice:30}}</a></p>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div>
+            <h4>To go further please Login!!!</h4>
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg active" >Login</a>
+        </div>
+    {% endif %}
+    
+{% endblock %}
+

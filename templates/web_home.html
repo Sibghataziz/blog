@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Blog
+{% endblock %}
+
+
+{% block content %}
+<br><br>
+<div class="position-absolute top-50 start-50 translate-middle">
+    <br>
+    <h1>Welcome to the Blog!!!</h1>
+    <h3>Please choose the options below!!!!!</h3>
+
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg active" >Log In</a>
+    <a href="{% url 'register' %}" class="btn btn-primary btn-lg active" >Register</a>
+</div>
+
+    {% endblock %}
